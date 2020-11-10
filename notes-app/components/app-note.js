@@ -6,6 +6,14 @@ export class AppNote extends HTMLElement {
     `;
   }
 
+  get noteid() {
+    return this.getAttribute('noteid');
+  }
+
+  set noteid(val) {
+    this.setAttribute('noteid', val);
+  }
+
   get content() {
     return this.getAttribute('content');
   }
@@ -39,12 +47,15 @@ export class AppNote extends HTMLElement {
     this.p.textContent = this.content;
 
     this.addEventListener('click', _ => {
+      const rect = this.getBoundingClientRect();
+
       const event = new CustomEvent('openmodal', {
         detail: {
-          x: this.offsetLeft,
-          y: this.offsetTop,
-          width: this.clientWidth,
+          x: rect.left,
+          y: rect.top,
+          width: rect.width,
           note: {
+            id: this.noteid,
             title: this.title,
             content: this.content,
             timestamp: this.timestamp

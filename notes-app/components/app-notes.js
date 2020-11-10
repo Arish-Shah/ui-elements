@@ -13,6 +13,7 @@ export class AppNotes extends HTMLElement {
       .forEach(key => {
         const note = notes[key];
         const appNote = document.createElement('app-note');
+        appNote.noteid = key;
         appNote.content = note.content;
         appNote.title = note.title;
         appNote.timestamp = note.timestamp;

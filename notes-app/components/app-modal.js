@@ -1,6 +1,15 @@
+import { whenOpen, whenClose } from '../util/anim.js';
+
 export class AppModal extends HTMLElement {
   static template() {
-    return ``;
+    return `
+      <style></style>
+      <div class="overlay"></div>
+      <form class="container">
+        <input placeholder="Title" type="text" />
+        <div contenteditable="true" placeholder="Note"></div>
+      </form>
+    `;
   }
 
   get x() {
@@ -25,6 +34,14 @@ export class AppModal extends HTMLElement {
 
   set startwidth(val) {
     this.setAttribute('startwidth', val);
+  }
+
+  get noteid() {
+    return this.getAttribute('noteid');
+  }
+
+  set noteid(val) {
+    this.setAttribute('noteid', val);
   }
 
   get title() {
@@ -52,7 +69,7 @@ export class AppModal extends HTMLElement {
   }
 
   get open() {
-    return this.getAttribute('open') || null;
+    return this.hasAttribute('open');
   }
 
   set open(val) {
@@ -63,8 +80,46 @@ export class AppModal extends HTMLElement {
     }
   }
 
+  static get observedAttributes() {
+    return ['open'];
+  }
+
   connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
+
+    this.styleEl = this.querySelector('style');
+    this.overlayEl = this.querySelector('.overlay');
+    this.containerEl = this.querySelector('.container');
+    this.inputEl = this.querySelector('input');
+    this.contentEl = this.containerEl.querySelector('div');
+  }
+
+  attributeChangedCallback() {
+    const overlayElEventListener = () => (this.open = false);
+    this.overlayEl.removeEventListener('click', overlayElEventListener);
+
+    const rect = this.containerEl.getBoundingClientRect();
+
+    if (this.open) {
+      this.styleEl.textContent = whenOpen(
+        this.x,
+        this.y,
+        this.startwidth,
+        rect.width,
+        rect.height
+      );
+      this.inputEl.value = this.title;
+      this.contentEl.textContent = this.content;
+      this.overlayEl.addEventListener('click', overlayElEventListener);
+    } else {
+      this.styleEl.textContent = whenClose(
+        this.x,
+        this.y,
+        this.startwidth,
+        rect.width,
+        rect.height
+      );
+    }
   }
 }
 

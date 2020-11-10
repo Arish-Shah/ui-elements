@@ -19,10 +19,17 @@ export class AppRoot extends HTMLElement {
       appModal.x = detail.x;
       appModal.y = detail.y;
       appModal.startwidth = detail.width;
+      appModal.noteid = detail.note.id;
       appModal.title = detail.note.title;
       appModal.content = detail.note.content;
       appModal.timestamp = detail.note.timestamp;
       appModal.open = true;
+    });
+
+    window.addEventListener('keyup', e => {
+      if (e.key === 'Escape' && appModal.open) {
+        appModal.open = false;
+      }
     });
   }
 }
