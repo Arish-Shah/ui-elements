@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Worker</title>
+    <style>
+      #file {
+        width: 0px;
+        height: 0px;
+        overflow: hidden;
+      }
+
+      input + label {
+        display: inline-block;
+        background: #777;
+        font-family: sans-serif;
+        font-size: 2em;
+        color: #f3f3f3;
+      }
+
+      #file:focus + label {
+        outline: 5px solid teal;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="file" accept="image/*" name="input" id="file" />
+      <label for="file">Choose File</label>
+    </div>
+    <br />
+    <canvas id="preview"></canvas>
+    <script src="./app.js"></script>
+  </body>
+</html>
