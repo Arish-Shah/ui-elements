@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service Worker</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Sage</h1>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="card">
+        <img src="./img/sage.jpg" alt="Sage" draggable="false" />
+        <p>
+          Sage creates safety for herself and her team wherever she goes. Able
+          to revive fallen friends and stave off forceful assaults, she provides
+          a calm center to a hellish battlefield.
+        </p>
+        <p>
+          The most prominent support character to date hails from China and
+          brings orbs that heal allies, slow enemies, and create barriers out of
+          the ground to impede the flow of a match. Her ultimate ability allows
+          her to resurrect a fallen ally,which is significant in a game with no
+          respawns.
+        </p>
+      </div>
+    </div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+  </body>
+</html>
