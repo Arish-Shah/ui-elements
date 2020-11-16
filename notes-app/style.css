@@ -1,0 +1,208 @@
+:root {
+  --bg: #202124;
+  --text: #e8eaed;
+  --border: #5f6368;
+  --radius: 8px;
+  --placeholder: #7c8287;
+  --shadow: 0 0 4px rgba(0, 0, 0, 1);
+  --transition: 200ms cubic-bezier(0, 0, 0, 0.3);
+  --shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+[contenteditable='true']:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  color: var(--placeholder);
+  display: block; /* For Firefox */
+}
+
+wc-root,
+wc-header,
+wc-input,
+wc-notes,
+wc-note,
+wc-modal {
+  display: block;
+}
+
+/* wc-root */
+wc-root {
+  width: 100%;
+  max-width: 1240px;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+/* wc-header */
+wc-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+wc-header img {
+  height: 2.65rem;
+}
+
+wc-header span {
+  margin: 0 20px;
+}
+
+/* wc-input */
+
+/* wc-notes */
+wc-notes {
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+/* wc-note */
+wc-note {
+  border: 1px solid var(--border);
+  width: 250px;
+  word-wrap: break-word;
+  border-radius: var(--radius);
+  margin-top: 12px;
+  padding: 1rem;
+  cursor: default;
+  user-select: none;
+  background: var(--bg);
+  z-index: 1;
+}
+
+wc-note:hover {
+  box-shadow: var(--shadow);
+}
+
+wc-note h4 {
+  margin: 0;
+}
+
+@media (max-width: 530px) {
+  wc-note {
+    width: 90%;
+  }
+}
+
+/* wc-modal */
+wc-modal {
+  pointer-events: none;
+}
+
+wc-modal[open] {
+  pointer-events: all;
+}
+
+wc-modal .overlay {
+  opacity: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+  position: fixed;
+  background: var(--bg);
+  transition: opacity var(--transition);
+}
+
+wc-modal[open] .overlay {
+  opacity: 0.75;
+}
+
+wc-modal form {
+  transform-origin: top left;
+  position: fixed;
+  z-index: 100;
+  background: var(--bg);
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1rem 0.35rem 1rem;
+  box-shadow: var(--shadow-modal);
+  opacity: 0;
+  left: 50%;
+  top: 40%;
+}
+
+wc-modal form * {
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+
+wc-modal form.show-contents * {
+  opacity: 1;
+}
+
+wc-modal form input {
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text);
+  border: none;
+  width: 100%;
+}
+
+wc-modal form .content {
+  padding: 1rem 0;
+  line-height: 1.5;
+  height: 100%;
+  cursor: text;
+}
+
+wc-modal .edited {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--placeholder);
+}
+
+wc-modal form .footer {
+  padding-top: 0.55rem;
+  text-align: right;
+}
+
+wc-modal form .footer button {
+  color: var(--text);
+  background: var(--bg);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.45rem 1.5rem;
+  border-radius: 4px;
+}
+
+wc-modal form .footer button:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+wc-modal form .footer button:focus,
+wc-modal form .footer button:active {
+  background: rgba(255, 255, 255, 0.075);
+}
