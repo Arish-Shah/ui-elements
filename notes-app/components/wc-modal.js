@@ -9,7 +9,13 @@ export class WCModal extends HTMLElement {
         <div contenteditable="true" placeholder="Note" class="content"></div>
         <span class="edited"></span>
         <div class="footer">
-          <button>Close</button>
+          <button title="Delete" id="delete-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+              <path d="M0 0h24v24H0z" fill="none"></path>
+            </svg>
+          </button>
+          <button title="Close">Close</button>
         </div>
       </form>
     `;
@@ -19,6 +25,7 @@ export class WCModal extends HTMLElement {
     super();
     this.handleOverlayClick = this.handleOverlayClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   get open() {
@@ -52,9 +59,11 @@ export class WCModal extends HTMLElement {
     this.inputEl = this.formEl.querySelector('input');
     this.contentEl = this.formEl.querySelector('.content');
     this.editedEl = this.querySelector('.edited');
+    this.deleteButtonEl = this.querySelector('#delete-button');
 
     this.formEl.addEventListener('submit', this.handleSubmit);
     this.overlayEl.addEventListener('click', this.handleOverlayClick);
+    this.deleteButtonEl.addEventListener('click', this.handleDelete);
   }
 
   handleOverlayClick() {
@@ -64,6 +73,12 @@ export class WCModal extends HTMLElement {
   handleSubmit(event) {
     event.preventDefault();
     this.open = false;
+  }
+
+  handleDelete() {
+    if (confirm('Are you sure you want to delete this note?')) {
+      $http.delete(this.props.id);
+    }
   }
 
   attributeChangedCallback(attrName) {
@@ -103,8 +118,7 @@ export class WCModal extends HTMLElement {
       ],
       {
         fill: 'forwards',
-        duration: 200,
-        easing: 'ease-in'
+        duration: 200
       }
     );
 
@@ -130,11 +144,6 @@ export class WCModal extends HTMLElement {
   }
 
   getTransforms() {
-    const noteX = this.props.left;
-    const noteY = this.props.top;
-    const notesWidth = this.props.width;
-    const notesHeight = this.props.height;
-
     const rect = this.formEl.getBoundingClientRect();
     const modalX = rect.left;
     const modalY = rect.top;
@@ -142,10 +151,10 @@ export class WCModal extends HTMLElement {
     const modalHeight = rect.height;
 
     return {
-      translateX: noteX - modalX,
-      translateY: noteY - modalY,
-      scaleX: notesWidth / modalWidth,
-      scaleY: notesHeight / modalHeight
+      translateX: this.props.left - modalX,
+      translateY: this.props.top - modalY,
+      scaleX: this.props.width / modalWidth,
+      scaleY: this.props.height / modalHeight
     };
   }
 
@@ -162,6 +171,7 @@ export class WCModal extends HTMLElement {
   disconnectedCallback() {
     this.overlayEl.removeEventListener('click', this.handleOverlayClick);
     this.formEl.removeEventListener('submit', this.handleSubmit);
+    this.deleteButtonEl.removeEventListener('click', this.handleDelete);
   }
 }
 
