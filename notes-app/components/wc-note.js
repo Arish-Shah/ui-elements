@@ -20,6 +20,7 @@ export class WCNote extends HTMLElement {
 
   connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
+    this.parent = this.parentElement;
     this.h4 = this.querySelector('h4');
     this.p = this.querySelector('p');
     this.render();
@@ -53,6 +54,7 @@ export class WCNote extends HTMLElement {
 
   disconnectedCallback() {
     this.removeEventListener('click', this.handleClick);
+    this.parent.updateMasonry();
   }
 }
 

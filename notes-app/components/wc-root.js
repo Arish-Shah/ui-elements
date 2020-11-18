@@ -16,19 +16,23 @@ export class WCRoot extends HTMLElement {
 
   connectedCallback() {
     this.wcModal = this.querySelector('wc-modal');
+    this.wcInput = this.querySelector('wc-input');
     window.addEventListener('keyup', this.handleKeyUp);
+
     this.wcModal.addEventListener('showNote', this.showNote);
   }
 
   handleKeyUp(event) {
     if (event.key === 'Escape') {
       this.wcModal.open = false;
+      this.wcInput.open = false;
     }
   }
 
   showNote(event) {
     const id = event.detail.id;
-    document.getElementById(id).style.opacity = 1;
+    const note = document.getElementById(id);
+    if (note) note.style.opacity = 1;
   }
 
   disconnectedCallback() {

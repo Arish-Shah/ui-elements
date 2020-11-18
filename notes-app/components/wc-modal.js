@@ -75,9 +75,11 @@ export class WCModal extends HTMLElement {
     this.open = false;
   }
 
-  handleDelete() {
+  handleDelete(event) {
     if (confirm('Are you sure you want to delete this note?')) {
       $http.delete(this.props.id);
+    } else {
+      event.preventDefault();
     }
   }
 
@@ -94,6 +96,7 @@ export class WCModal extends HTMLElement {
           this.contentEl.textContent !== this.props.content
         ) {
           $http.put(this.props.id, {
+            id: this.props.id,
             title: this.inputEl.value,
             content: this.contentEl.textContent,
             timestamp: new Date().valueOf()
@@ -118,7 +121,7 @@ export class WCModal extends HTMLElement {
       ],
       {
         fill: 'forwards',
-        duration: 200
+        duration: 175
       }
     );
 
