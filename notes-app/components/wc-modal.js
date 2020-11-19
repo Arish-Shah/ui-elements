@@ -86,19 +86,19 @@ export class WCModal extends HTMLElement {
   attributeChangedCallback(attrName) {
     if (this.open) {
       this.inputEl.value = this.props.title || '';
-      this.contentEl.textContent = this.props.content || '';
+      this.contentEl.innerHTML = this.props.content || '';
       this.editedEl.textContent = this.getEditedMoment(this.props.timestamp);
       this.transitionIn();
     } else {
       if (attrName === 'open') {
         if (
           this.inputEl.value !== this.props.title ||
-          this.contentEl.textContent !== this.props.content
+          this.contentEl.innerHTML !== this.props.content
         ) {
           $http.put(this.props.id, {
             id: this.props.id,
             title: this.inputEl.value,
-            content: this.contentEl.textContent,
+            content: this.contentEl.innerHTML,
             timestamp: new Date().valueOf()
           });
         }
@@ -127,6 +127,7 @@ export class WCModal extends HTMLElement {
 
     this.animation.finished.then(() => {
       this.formEl.classList.toggle('show-contents');
+      this.focusDiv();
     });
   }
 

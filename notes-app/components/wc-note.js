@@ -33,7 +33,7 @@ export class WCNote extends HTMLElement {
   render() {
     if (this.isConnected) {
       this.h4.textContent = this.props.title;
-      this.p.textContent = this.props.content;
+      this.p.innerHTML = this.props.content;
       this.addEventListener('click', this.handleClick);
     }
   }
