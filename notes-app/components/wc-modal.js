@@ -167,9 +167,11 @@ export class WCModal extends HTMLElement {
   }
 
   focusDiv() {
-    this.contentEl.focus();
-    document.execCommand('selectAll', false, null);
-    document.getSelection().collapseToEnd();
+    if (window.innerWidth > 530) {
+      this.contentEl.focus();
+      document.execCommand('selectAll', false, null);
+      document.getSelection().collapseToEnd();
+    }
   }
 
   disconnectedCallback() {

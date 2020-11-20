@@ -1,5 +1,3 @@
-import data from './data.js';
-
 const URL = 'https://keep-react.firebaseio.com/notes';
 const wcRoot = document.querySelector('wc-root');
 
