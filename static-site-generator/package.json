@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "rm -rf dist && mkdir dist",
+    "prebuild": "rm -rf build && mkdir build",
     "build": "node src/app.js",
-    "start": "serve dist"
+    "start": "serve build"
   },
   "keywords": [],
   "author": "",
