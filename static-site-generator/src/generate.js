@@ -3,6 +3,8 @@ const remark = require("remark");
 const remarkHtml = require("remark-html");
 
 const getTemplate = require("./util/get-template");
+const formatDate = require("./util/format-date");
+const { prev, next } = require("./util/move");
 
 function getPostData(data) {
   const matterResult = matter(data.content);
@@ -19,23 +21,39 @@ function getPostData(data) {
 
 function generateIndex(postsData) {
   const indexTemplate = getTemplate("index.html");
+
   const ul = postsData
-    .map(
-      (post) => `
-      <li>
-        <a href="./${post.id}.html"><h3>${post.meta.title}</h3></a>
-      </li>
-    `
-    )
+    .map((post) => {
+      const date = formatDate(post.meta.date);
+      return `
+        <li>
+          <a href="./${post.id}">
+            ${post.meta.title}
+          </a>
+          <p>${date}</p>
+          <p>${post.meta.spoiler}</p>
+        </li>`;
+    })
     .join("");
-  const index = indexTemplate.replace("% postsList %", ul);
+
+  const index = indexTemplate.replace("{{ posts }}", ul);
   return index;
 }
 
-function generatePost(current, prev, next) {
+function generatePost(current, prevPost, nextPost) {
   const postTemplate = getTemplate("post.html");
-  let post = postTemplate.replace("% document.title %", current.meta.title);
-  post = post.replace("% document.body %", current.html);
+  let post = postTemplate.replace(/{{ title }}/g, current.meta.title);
+  post = post.replace("{{ content }}", current.html);
+  post = post.replace("{{ date }}", formatDate(current.meta.date));
+
+  post = prevPost
+    ? post.replace("{{ prev }}", prev(prevPost))
+    : post.replace("{{ prev }}", "");
+
+  post = nextPost
+    ? post.replace("{{ next }}", next(nextPost))
+    : post.replace("{{ next }}", "");
+
   return post;
 }
 

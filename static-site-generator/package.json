@@ -6,6 +6,9 @@
   "scripts": {
     "prebuild": "rm -rf build && mkdir build",
     "build": "node src/app.js",
+    "postbuild": "npm run copy:static && npm run copy:assets",
+    "copy:static": "cp -ar static/. build",
+    "copy:assets": "cp -ar src/assets build",
     "start": "serve build"
   },
   "keywords": [],

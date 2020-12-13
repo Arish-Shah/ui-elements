@@ -3,9 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>% document.title %</title>
+    <link rel="stylesheet" href="./assets/global.css" />
+    <title>{{ title }} / Static Blog Generator</title>
+    <style>
+      .brand {
+        margin: 0.75rem 0;
+        color: var(--pink);
+      }
+
+      .brand-link {
+        text-decoration: none;
+      }
+
+      .title {
+        margin-top: 3rem;
+        font-size: 2.75rem;
+        line-height: 3rem;
+        margin-bottom: 1.5rem;
+      }
+
+      a {
+        text-decoration: underline;
+        transition: text-decoration 100ms linear;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      .content h1,
+      .content h2,
+      .content h3,
+      .content h4,
+      .content h5,
+      .content h6 {
+        margin-top: 3.5rem;
+        margin-bottom: 1.75rem;
+        font-family: var(--sans-serif);
+      }
+
+      .date {
+        font-size: 0.9rem;
+        line-height: 0;
+      }
+
+      .content {
+        padding-top: 2rem;
+      }
+
+      .content p {
+        font-size: 1.05rem;
+        margin-bottom: 1.75rem;
+        line-height: 1.75rem;
+      }
+
+      .content blockquote {
+        margin-left: -1.75rem;
+        margin-right: 1.75rem;
+        padding-left: 1.42188rem;
+        margin-bottom: 1.75rem;
+        font-size: 1.20112rem;
+        line-height: 1.75rem;
+        font-style: italic;
+        border-left: 0.32813rem solid hsla(0, 0%, 0%, 0.9);
+        border-left-color: rgba(0, 0, 0, 0.9);
+        border-left-color: inherit;
+        opacity: 0.8;
+      }
+
+      .content code,
+      .content pre {
+        font-family: var(--monospace);
+      }
+
+      .move {
+        list-style: outside none none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0;
+      }
+
+      .move li {
+        margin-top: 1rem;
+        font-size: 1.05rem;
+      }
+
+      .bottom h2 {
+        margin-top: 4rem;
+      }
+    </style>
   </head>
   <body>
-    % document.body %
+    <div class="container">
+      <a href="/" style="text-decoration: none">
+        <h2 class="brand">Static Blog Generator</h2>
+      </a>
+      <h1 class="title">{{ title }}</h1>
+      <p class="date">{{ date }}</p>
+      <div class="content">{{ content }}</div>
+      <a href="/" class="brand-link bottom">
+        <h2 class="brand">Static Blog Generator</h2>
+      </a>
+      <ul class="move">
+        <li>{{ prev }}</li>
+        <li>{{ next }}</li>
+      </ul>
+    </div>
   </body>
 </html>

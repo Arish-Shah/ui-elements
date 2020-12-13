@@ -3,11 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blogs</title>
+    <link rel="stylesheet" href="./assets/global.css" />
+    <title>All Posts / Static Blog Generator</title>
+    <style>
+      nav h1 {
+        font-size: 2rem;
+        margin: 0.5rem 0;
+        color: var(--white);
+      }
+
+      ul {
+        padding: 0;
+        list-style-type: none;
+        padding-top: 2rem;
+      }
+
+      li {
+        padding-bottom: 2rem;
+      }
+
+      li a {
+        font-size: 1.75rem;
+        font-weight: 800;
+        text-decoration: none;
+        font-family: var(--serif);
+      }
+
+      li p:first-of-type {
+        font-size: 0.9rem;
+        line-height: 0;
+      }
+
+      li p:last-of-type {
+        font-size: 1.1rem;
+      }
+    </style>
   </head>
   <body>
-    <ul>
-      % postsList %
-    </ul>
+    <div class="container">
+      <nav>
+        <a href="/">
+          <h1>Static Blog Generator</h1>
+        </a>
+      </nav>
+      <ul>
+        {{ posts }}
+      </ul>
+    </div>
   </body>
 </html>
