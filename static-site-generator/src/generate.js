@@ -58,7 +58,6 @@ function generatePost(current, prevPost, nextPost) {
 }
 
 function generate(rawPostsData) {
-  console.info("Generating Pages...");
   const files = {};
   const postsData = rawPostsData
     .map((data) => getPostData(data))

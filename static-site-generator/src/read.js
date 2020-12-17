@@ -14,7 +14,6 @@ function readFile(fileName) {
 }
 
 function readFiles() {
-  console.info("Reading Files...");
   const fileNames = fs.readdirSync(path.join(__dirname, "pages"), "utf-8");
   return fileNames.map((fileName) => readFile(fileName));
 }
