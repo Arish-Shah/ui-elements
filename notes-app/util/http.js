@@ -1,4 +1,4 @@
-const URL = 'https://keep-react.firebaseio.com/notes';
+const URL = 'https://wc-keep-notes-app-default-rtdb.asia-southeast1.firebasedatabase.app/notes';
 const wcRoot = document.querySelector('wc-root');
 
 export default {
