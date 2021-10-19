@@ -1,8 +1,8 @@
-export const transformObject = obj => {
+export const transformObject = (obj) => {
   return Object.keys(obj)
     .reverse()
-    .map(key => ({
+    .map((key) => ({
       ...obj[key],
-      id: key
+      id: key,
     }));
 };

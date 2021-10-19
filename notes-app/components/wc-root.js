@@ -15,15 +15,15 @@ export class WCRoot extends HTMLElement {
   }
 
   connectedCallback() {
-    this.wcModal = this.querySelector('wc-modal');
-    this.wcInput = this.querySelector('wc-input');
-    window.addEventListener('keyup', this.handleKeyUp);
+    this.wcModal = this.querySelector("wc-modal");
+    this.wcInput = this.querySelector("wc-input");
+    window.addEventListener("keyup", this.handleKeyUp);
 
-    this.wcModal.addEventListener('showNote', this.showNote);
+    this.wcModal.addEventListener("showNote", this.showNote);
   }
 
   handleKeyUp(event) {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       this.wcModal.open = false;
       this.wcInput.open = false;
     }
@@ -36,9 +36,9 @@ export class WCRoot extends HTMLElement {
   }
 
   disconnectedCallback() {
-    window.removeEventListener('keyup', this.handleKeyUp);
+    window.removeEventListener("keyup", this.handleKeyUp);
   }
 }
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = WCRoot.template();

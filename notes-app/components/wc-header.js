@@ -12,5 +12,5 @@ export class WCHeader extends HTMLElement {
   }
 }
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = WCHeader.template();

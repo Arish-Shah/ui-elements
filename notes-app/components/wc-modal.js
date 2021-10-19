@@ -1,4 +1,4 @@
-import $http from '../util/http.js';
+import $http from "../util/http.js";
 
 export class WCModal extends HTMLElement {
   static template() {
@@ -29,41 +29,41 @@ export class WCModal extends HTMLElement {
   }
 
   get open() {
-    return this.hasAttribute('open');
+    return this.hasAttribute("open");
   }
 
   set open(val) {
     if (val) {
-      this.setAttribute('open', '');
+      this.setAttribute("open", "");
     } else {
-      this.removeAttribute('open');
+      this.removeAttribute("open");
     }
   }
 
   get props() {
-    return JSON.parse(this.getAttribute('props'));
+    return JSON.parse(this.getAttribute("props"));
   }
 
   set props(val) {
-    this.setAttribute('props', JSON.stringify(val));
+    this.setAttribute("props", JSON.stringify(val));
   }
 
   static get observedAttributes() {
-    return ['props', 'open'];
+    return ["props", "open"];
   }
 
   connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
-    this.overlayEl = this.querySelector('.overlay');
-    this.formEl = this.querySelector('form');
-    this.inputEl = this.formEl.querySelector('input');
-    this.contentEl = this.formEl.querySelector('.content');
-    this.editedEl = this.querySelector('.edited');
-    this.deleteButtonEl = this.querySelector('#delete-button');
+    this.overlayEl = this.querySelector(".overlay");
+    this.formEl = this.querySelector("form");
+    this.inputEl = this.formEl.querySelector("input");
+    this.contentEl = this.formEl.querySelector(".content");
+    this.editedEl = this.querySelector(".edited");
+    this.deleteButtonEl = this.querySelector("#delete-button");
 
-    this.formEl.addEventListener('submit', this.handleSubmit);
-    this.overlayEl.addEventListener('click', this.handleOverlayClick);
-    this.deleteButtonEl.addEventListener('click', this.handleDelete);
+    this.formEl.addEventListener("submit", this.handleSubmit);
+    this.overlayEl.addEventListener("click", this.handleOverlayClick);
+    this.deleteButtonEl.addEventListener("click", this.handleDelete);
   }
 
   handleOverlayClick() {
@@ -76,7 +76,7 @@ export class WCModal extends HTMLElement {
   }
 
   handleDelete(event) {
-    if (confirm('Are you sure you want to delete this note?')) {
+    if (confirm("Are you sure you want to delete this note?")) {
       $http.delete(this.props.id);
     } else {
       event.preventDefault();
@@ -85,12 +85,12 @@ export class WCModal extends HTMLElement {
 
   attributeChangedCallback(attrName) {
     if (this.open) {
-      this.inputEl.value = this.props.title || '';
-      this.contentEl.innerHTML = this.props.content || '';
+      this.inputEl.value = this.props.title || "";
+      this.contentEl.innerHTML = this.props.content || "";
       this.editedEl.textContent = this.getEditedMoment(this.props.timestamp);
       this.transitionIn();
     } else {
-      if (attrName === 'open') {
+      if (attrName === "open") {
         if (
           this.inputEl.value !== this.props.title ||
           this.contentEl.innerHTML !== this.props.content
@@ -99,7 +99,7 @@ export class WCModal extends HTMLElement {
             id: this.props.id,
             title: this.inputEl.value,
             content: this.contentEl.innerHTML,
-            timestamp: new Date().valueOf()
+            timestamp: new Date().valueOf(),
           });
         }
         this.transitionOut();
@@ -113,35 +113,35 @@ export class WCModal extends HTMLElement {
     this.animation = this.formEl.animate(
       [
         {
-          transform: `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`
+          transform: `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
         },
         {
-          transform: 'translate(-50%, -40%) scale(1, 1)'
-        }
+          transform: "translate(-50%, -40%) scale(1, 1)",
+        },
       ],
       {
-        fill: 'forwards',
-        duration: 175
+        fill: "forwards",
+        duration: 175,
       }
     );
 
     this.animation.finished.then(() => {
-      this.formEl.classList.toggle('show-contents');
+      this.formEl.classList.toggle("show-contents");
       this.focusDiv();
     });
   }
 
   transitionOut() {
-    this.formEl.classList.toggle('show-contents');
+    this.formEl.classList.toggle("show-contents");
     this.animation.reverse();
 
     this.animation.finished.then(() => {
       this.formEl.style.opacity = 0;
       this.dispatchEvent(
-        new CustomEvent('showNote', {
+        new CustomEvent("showNote", {
           detail: {
-            id: this.props.id
-          }
+            id: this.props.id,
+          },
         })
       );
     });
@@ -158,7 +158,7 @@ export class WCModal extends HTMLElement {
       translateX: this.props.left - modalX,
       translateY: this.props.top - modalY,
       scaleX: this.props.width / modalWidth,
-      scaleY: this.props.height / modalHeight
+      scaleY: this.props.height / modalHeight,
     };
   }
 
@@ -169,17 +169,17 @@ export class WCModal extends HTMLElement {
   focusDiv() {
     if (window.innerWidth > 530) {
       this.contentEl.focus();
-      document.execCommand('selectAll', false, null);
+      document.execCommand("selectAll", false, null);
       document.getSelection().collapseToEnd();
     }
   }
 
   disconnectedCallback() {
-    this.overlayEl.removeEventListener('click', this.handleOverlayClick);
-    this.formEl.removeEventListener('submit', this.handleSubmit);
-    this.deleteButtonEl.removeEventListener('click', this.handleDelete);
+    this.overlayEl.removeEventListener("click", this.handleOverlayClick);
+    this.formEl.removeEventListener("submit", this.handleSubmit);
+    this.deleteButtonEl.removeEventListener("click", this.handleDelete);
   }
 }
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = WCModal.template();

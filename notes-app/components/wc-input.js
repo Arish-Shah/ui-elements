@@ -1,4 +1,4 @@
-import $http from '../util/http.js';
+import $http from "../util/http.js";
 
 export class WCInput extends HTMLElement {
   static template() {
@@ -15,20 +15,20 @@ export class WCInput extends HTMLElement {
   }
 
   get open() {
-    return this.hasAttribute('open');
+    return this.hasAttribute("open");
   }
 
   set open(val) {
     if (val) {
-      this.setAttribute('open', '');
+      this.setAttribute("open", "");
     } else {
       this.checkFormDirty();
-      this.removeAttribute('open');
+      this.removeAttribute("open");
     }
   }
 
   static get observedAttributes() {
-    return ['open'];
+    return ["open"];
   }
 
   constructor() {
@@ -40,15 +40,15 @@ export class WCInput extends HTMLElement {
 
   connectedCallback() {
     this.appendChild(template.content.cloneNode(true));
-    this.closedEl = this.querySelector('.closed');
-    this.openEl = this.querySelector('.open');
-    this.formEl = this.querySelector('form');
-    this.titleEl = this.openEl.querySelector('.title');
-    this.contentEl = this.openEl.querySelector('.content');
+    this.closedEl = this.querySelector(".closed");
+    this.openEl = this.querySelector(".open");
+    this.formEl = this.querySelector("form");
+    this.titleEl = this.openEl.querySelector(".title");
+    this.contentEl = this.openEl.querySelector(".content");
 
-    this.formEl.addEventListener('submit', this.handleFormSubmit);
-    this.closedEl.addEventListener('focus', this.handleClosedFocus);
-    window.addEventListener('click', this.handleWindowClick);
+    this.formEl.addEventListener("submit", this.handleFormSubmit);
+    this.closedEl.addEventListener("focus", this.handleClosedFocus);
+    window.addEventListener("click", this.handleWindowClick);
   }
 
   attributeChangedCallback() {
@@ -57,12 +57,12 @@ export class WCInput extends HTMLElement {
 
   toggleInput() {
     if (this.open) {
-      this.closedEl.classList.add('hide');
-      this.openEl.classList.remove('hide');
+      this.closedEl.classList.add("hide");
+      this.openEl.classList.remove("hide");
       this.contentEl.focus();
     } else {
-      this.closedEl.classList.remove('hide');
-      this.openEl.classList.add('hide');
+      this.closedEl.classList.remove("hide");
+      this.openEl.classList.add("hide");
     }
   }
 
@@ -87,18 +87,18 @@ export class WCInput extends HTMLElement {
     if (title || content) {
       $http.post({
         title,
-        content
+        content,
       });
-      this.titleEl.value = '';
-      this.contentEl.innerHTML = '';
+      this.titleEl.value = "";
+      this.contentEl.innerHTML = "";
     }
   }
 
   disconnectedCallback() {
-    this.closedEl.removeEventListener('focus', this.handleClosedFocus);
-    window.removeEventListener('click', this.handleWindowClick);
+    this.closedEl.removeEventListener("focus", this.handleClosedFocus);
+    window.removeEventListener("click", this.handleWindowClick);
   }
 }
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = WCInput.template();

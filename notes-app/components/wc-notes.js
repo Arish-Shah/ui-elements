@@ -1,5 +1,5 @@
-import $http from '../util/http.js';
-import { transformObject } from '../util/transform.js';
+import $http from "../util/http.js";
+import { transformObject } from "../util/transform.js";
 
 export class WCNotes extends HTMLElement {
   static template() {
@@ -15,15 +15,15 @@ export class WCNotes extends HTMLElement {
     const response = await $http.get();
     const notes = transformObject(response);
     this.removeChild(this.firstChild);
-    notes.forEach(note => {
-      const wcNote = document.createElement('wc-note');
+    notes.forEach((note) => {
+      const wcNote = document.createElement("wc-note");
       wcNote.props = note;
       wcNote.id = note.id;
       this.appendChild(wcNote);
     });
     this.masonry = new Masonry(this, {
       fitWidth: window.innerWidth > 530,
-      gutter: 12
+      gutter: 12,
     });
   }
 
@@ -41,5 +41,5 @@ export class WCNotes extends HTMLElement {
   }
 }
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = WCNotes.template();
