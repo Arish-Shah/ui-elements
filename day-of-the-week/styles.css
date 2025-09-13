@@ -1,0 +1,69 @@
+:root {
+  --text: #f1f7fb;
+  --background: #131f24;
+  --border: #37464f;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: lowercase;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--text);
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 2px solid var(--border);
+}
+
+.actions .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  margin: 2rem 0;
+}
+
+h3 {
+  margin: 1rem 0;
+}
+
+h2 {
+  opacity: 0;
+  margin-top: 15%;
+  font-weight: normal;
+  transition: opacity 100ms ease;
+  font-size: 2.5rem;
+}
+
+h2 span {
+  font-weight: bold;
+}
+
+button {
+  color: var(--background);
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+}
