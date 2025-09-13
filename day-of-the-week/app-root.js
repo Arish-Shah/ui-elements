@@ -1,4 +1,4 @@
-import { getRandomDate } from "../util.js";
+import { getRandomDate } from "./util.js";
 
 export class AppRoot extends HTMLElement {
   static observedAttributes = ["date", "show-answer"];

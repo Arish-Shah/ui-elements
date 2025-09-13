@@ -7,3 +7,4 @@ A collection of prototyped UI samples built using JavaScript
 - [Service Worker](service-worker)
 - [SSG](static-site-generator)
 - [Web Worker](web-worker)
+- [Day of the Week](day-of-the-week)
