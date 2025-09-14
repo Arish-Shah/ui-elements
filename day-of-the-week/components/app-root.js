@@ -47,10 +47,10 @@ export class AppRoot extends HTMLElement {
 
     if (name === "show-answer") {
       if (this.showAnswer) {
-        this.answer.style.opacity = "100";
+        this.answer.style.visibility = "visible";
         this.T.paused = true;
       } else {
-        this.answer.style.opacity = "0";
+        this.answer.style.visibility = "hidden";
         this.T.paused = false;
       }
     }
