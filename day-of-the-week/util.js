@@ -3,7 +3,7 @@ function random(min, max) {
 }
 
 export function getRandomDate() {
-  const year = random(1900, new Date().getFullYear());
+  const year = random(1950, new Date().getFullYear());
   const month = random(0, 11);
   const day = random(1, 31);
 
