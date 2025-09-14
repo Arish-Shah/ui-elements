@@ -1,4 +1,4 @@
-import { getRandomDate } from "./util.js";
+import { getRandomDate } from "../util.js";
 
 export class AppRoot extends HTMLElement {
   static observedAttributes = ["date", "show-answer"];
@@ -10,6 +10,7 @@ export class AppRoot extends HTMLElement {
 
   connectedCallback() {
     this.Q = this.querySelector("#question")
+    this.T = this.querySelector("app-timer");
     this.A = this.querySelector("#answer");
 
     this.answer = this.querySelector(".answer-container");
@@ -41,14 +42,16 @@ export class AppRoot extends HTMLElement {
         weekday: "long",
       });
 
-      this.elapsed = 1;
+      this.T.elapsed = 0;
     }
 
     if (name === "show-answer") {
       if (this.showAnswer) {
         this.answer.style.opacity = "100";
+        this.T.paused = true;
       } else {
         this.answer.style.opacity = "0";
+        this.T.paused = false;
       }
     }
   }
@@ -58,13 +61,13 @@ export class AppRoot extends HTMLElement {
     template.innerHTML = `
       <div class="container">
         <h1>📅 <span id="question"></span></h1>
-        <h3>🕒 <span id="timer">0</span>s elapsed</h3>
+        <app-timer></app-timer>
         <h2 class="answer-container">it was <span id="answer">?</span></h2>
       </div>
       <div class="actions">
         <div class="container">
-          <button id="toggle">toggle answer</button>
           <button id="refresh">refresh</button>
+          <button id="toggle">toggle answer</button>
         </div>
       </div>
     `;

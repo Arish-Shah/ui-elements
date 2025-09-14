@@ -1,7 +1,11 @@
 :root {
   --text: #f1f7fb;
+  --text-muted: #52656d;
+  --text-dark: #131f24;
   --background: #131f24;
   --border: #37464f;
+  --primary: #49c0f8;
+  --primary-muted: #3b9ecc;
 }
 
 *,
@@ -52,7 +56,7 @@ h2 {
   opacity: 0;
   margin-top: 15%;
   font-weight: normal;
-  transition: opacity 100ms ease;
+  transition: opacity 200ms ease;
   font-size: 2.5rem;
 }
 
@@ -63,7 +67,28 @@ h2 span {
 button {
   color: var(--background);
   font-size: 1.15rem;
-  font-weight: bold;
   padding: 0.5rem 1rem;
-  border-radius: 12px;
+  border-radius: 1rem;
+  transform: translateY(-2px);
+  font-weight: bold;
 }
+
+button:active {
+  transform: translateY(0px);
+  box-shadow: 0 0 0 transparent !important;
+}
+
+button#refresh {
+  color: var(--text-dark);
+  background: var(--primary);
+  border: 2px solid var(--primary-muted);
+  box-shadow: 0 2px 0 var(--primary-muted);
+}
+
+button#toggle {
+  color: var(--text-muted);
+  background: var(--background);
+  border: 2px solid var(--border);
+  box-shadow: 0 2px 0 var(--border);
+}
+
