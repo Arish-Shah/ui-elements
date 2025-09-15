@@ -1,10 +1,7 @@
-# ui-elements
+# sandbox
 
-A collection of prototyped UI samples built using JavaScript
+a collection of experimental web components
 
-- [Color Clock](color-clock)
-- [Notes App](notes-app)
-- [Service Worker](service-worker)
-- [SSG](static-site-generator)
-- [Web Worker](web-worker)
-- [Day of the Week](day-of-the-week)
+- [notes app](notes-app)
+- [static site generator](static-site-generator)
+- [day of the week](day-of-the-week)
