@@ -16,7 +16,7 @@ export class CustomElement extends HTMLElement {
   render() {
     return html`
       <style>span { color: red; }</style>
-      <span>render undefined</span>
+      <span>render function not defined</span>
     `;
   }
 }
