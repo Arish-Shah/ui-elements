@@ -1,6 +1,4 @@
-import { getRandomDate } from "../util.js";
-
-export class AppRoot extends HTMLElement {
+class AppRoot extends HTMLElement {
   static observedAttributes = ["date", "show-answer"];
 
   constructor() {
@@ -15,7 +13,7 @@ export class AppRoot extends HTMLElement {
 
     this.answer = this.querySelector(".answer-container");
 
-    this.date = getRandomDate();
+    this.date = AppRoot.getRandomDate();
 
     const toggle = this.querySelector("#toggle");
     const refresh = this.querySelector("#refresh");
@@ -25,7 +23,7 @@ export class AppRoot extends HTMLElement {
     });
 
     refresh.addEventListener("click", _ => {
-      this.date = getRandomDate();
+      this.date = AppRoot.getRandomDate();
       this.showAnswer = false;
     });
   }
@@ -90,4 +88,18 @@ export class AppRoot extends HTMLElement {
     if (val) this.setAttribute("show-answer", "");
     else this.removeAttribute("show-answer");
   }
+
+  static random(max, min) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  static getRandomDate() {
+    const year = this.random(1950, new Date().getFullYear());
+    const month = this.random(0, 11);
+    const day = this.random(1, 31);
+
+    return new Date(year, month, day);
+  }
 }
+
+customElements.define("app-root", AppRoot);

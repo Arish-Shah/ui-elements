@@ -1,4 +1,4 @@
-export class AppTimer extends HTMLElement {
+class AppTimer extends HTMLElement {
   static observedAttributes = ["elapsed", "paused"];
 
   constructor() {
@@ -49,3 +49,5 @@ export class AppTimer extends HTMLElement {
     this.setAttribute("elapsed", val);
   }
 }
+
+customElements.define("app-timer", AppTimer);
