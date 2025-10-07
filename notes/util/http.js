@@ -10,6 +10,7 @@ export default {
   async post(val) {
     const newNote = store.addNote(val);
     const wcNote = document.createElement("wc-note");
+    wcNote.id = newNote.id;
     wcNote.props = newNote;
     document.querySelector("wc-notes").addNote(wcNote);
   },
