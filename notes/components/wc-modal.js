@@ -110,20 +110,16 @@ export class WCModal extends HTMLElement {
   transitionIn() {
     const { translateX, translateY, scaleX, scaleY } = this.getTransforms();
     this.formEl.style.opacity = 1;
-    this.animation = this.formEl.animate(
-      [
-        {
-          transform: `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
-        },
-        {
-          transform: "translate(-50%, -40%) scale(1, 1)",
-        },
+    this.animation = this.formEl.animate({
+      transform: [
+        `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
+        "translate(-50%, -40%) scale(1, 1)",
       ],
-      {
-        fill: "forwards",
-        duration: 175,
-      }
-    );
+    }, {
+      fill: "forwards",
+      duration: 175,
+      easing: "ease-in",
+    });
 
     this.animation.finished.then(() => {
       this.formEl.classList.toggle("show-contents");

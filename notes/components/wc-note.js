@@ -54,7 +54,6 @@ export class WCNote extends HTMLElement {
 
   disconnectedCallback() {
     this.removeEventListener("click", this.handleClick);
-    this.parent.updateMasonry();
   }
 }
 

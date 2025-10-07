@@ -2,8 +2,6 @@ export class WCHeader extends HTMLElement {
   static template() {
     return `
       <img src="./assets/wc.png" draggable="false" />
-      <span>+</span>
-      <img src="./assets/firebase.png" draggable="false" />
     `;
   }
 
