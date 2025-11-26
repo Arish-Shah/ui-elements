@@ -4,6 +4,8 @@ template.innerHTML = `
     * { box-sizing: border-box; }
     :host { flex: 1; }
   </style>
+  <slot></slot>
+  <div class="board"></div>
 `;
 
 class CrosswordGrid extends HTMLElement {
@@ -13,7 +15,10 @@ class CrosswordGrid extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+    const [rows, cols] = this.size.split("x").map(Number);
+    this.board = this.shadowRoot.querySelector(".board");
+  }
 }
 
 customElements.define("crossword-grid", CrosswordGrid);

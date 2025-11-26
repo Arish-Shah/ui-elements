@@ -1,27 +1,102 @@
-import "./src/components/crossword-game.js";
+import "./components/crossword-game.js";
 
 const game = document.createElement("crossword-game");
 
 game.data = {
+  id: "crosswords/mini/1",
   size: "5x5",
-  across: {
-    1: { clue: "Theatrical role", answer: "PART", row: 0, col: 3 },
-    5: { clue: "Capital of Vietnam", answer: "HANOI", row: 1, col: 2 },
-    6: { clue: "Father of a \"fur baby\"", answer: "CATDAD", row: 2, col: 1 },
-    7: { clue: "Words often accompanied by a ring", answer: "MARRYME", row: 3, col: 0 },
-    8: { clue: "Whirling currents", answer: "EDDIES", row: 4, col: 0 },
-    9: { clue: "Put up, as a statue", answer: "ERECT", row: 5, col: 0 },
-    10: { clue: "Race about half the length of a half-marathon", answer: "TENK", row: 6, col: 0 }
-  },
-  down: {
-    1: { clue: "SpongeBob's starfish friend", answer: "PATRICK", row: 0, col: 3 },
-    2: { clue: "\"Despite it all...\"", answer: "ANDYET", row: 0, col: 4 },
-    3: { clue: "Wanders here and there", answer: "ROAMS", row: 0, col: 5 },
-    4: { clue: "Company with a \"To Go\" stain remover", answer: "TIDE", row: 0, col: 6 },
-    5: { clue: "Become firm", answer: "HARDEN", row: 1, col: 2 },
-    6: { clue: "Small group of soldiers", answer: "CADRE", row: 2, col: 1 },
-    7: { clue: "What parallel lines never do", answer: "MEET", row: 3, col: 0 }
-  }
+  entries: [
+    {
+      id: "1A",
+      number: 1,
+      clue: "Prefix for some music genres",
+      direction: "across",
+      length: 5,
+      position: { x: 0, y: 0 },
+      solution: "ALT",
+    },
+    {
+      id: "4A",
+      number: 4,
+      clue: "Fab ___ (nickname for the Beatles)",
+      direction: "across",
+      length: 3,
+      position: { x: 1, y: 0 },
+      solution: "FOUR",
+    },
+    {
+      id: "6A",
+      number: 6,
+      clue: "Eagle's claw",
+      direction: "across",
+      length: 5,
+      position: { x: 2, y: 0 },
+      solution: "TALON",
+    },
+    {
+      id: "8A",
+      number: 8,
+      clue: "Fab ___ (nickname for a noted University of Michigan basketball team)",
+      direction: "across",
+      length: 4,
+      position: { x: 3, y: 1 },
+      solution: "FIVE",
+    },
+    {
+      id: "9A",
+      number: 10,
+      clue: "Congregant's seat",
+      direction: "across",
+      length: 3,
+      position: { x: 4, y: 2 },
+      solution: "PEW",
+    },
+    {
+      id: "1D",
+      number: 1,
+      clue: "Boat's rear",
+      direction: "down",
+      length: 3,
+      position: { x: 0, y: 0 },
+      solution: "AFT",
+    },
+    {
+      id: "2D",
+      number: 2,
+      clue: "Shape of a cat with its legs tucked under itself",
+      direction: "down",
+      length: 4,
+      position: { x: 0, y: 1 },
+      solution: "LOAF",
+    },
+    {
+      id: "3D",
+      number: 3,
+      clue: "Flower that's the subject of Dutch festivals",
+      direction: "down",
+      length: 5,
+      position: { x: 0, y: 2 },
+      solution: "TULIP",
+    },
+    {
+      id: "5D",
+      number: 5,
+      clue: "Wander aimlessly",
+      direction: "down",
+      length: 4,
+      position: { x: 1, y: 3 },
+      solution: "ROVE"
+    },
+    {
+      id: "7D",
+      number: 7,
+      clue: "Like many shows at the top of the Netflix queue",
+      direction: "down",
+      length: 3,
+      position: { x: 2, y: 4 },
+      solution: "NEW",
+    }
+  ],
 };
 
 document.body.appendChild(game);

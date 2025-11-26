@@ -21,21 +21,27 @@ template.innerHTML = `
       cursor: pointer;
       padding: 0.25rem 0;
       display: flex;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
     li.selected {
-      background: #b0daff;
+      background: #ffff00;
     }
 
     .clue-label {
-      width: 1.5rem;
+      width: 1.25rem;
       text-align: right;
       font-weight: bold;
     }
 
     .clue-text {
       flex: 1;
+    }
+
+    @media screen and (min-width: 992px) {
+      :host {
+        flex-direction: row;
+      }
     }
   </style>
   <div class="clues-container">
@@ -50,7 +56,7 @@ template.innerHTML = `
 
 class CrosswordClues extends HTMLElement {
   static get observedAttributes() {
-    return ["selected"];
+    return ["clue-id"];
   }
 
   constructor() {
@@ -63,26 +69,25 @@ class CrosswordClues extends HTMLElement {
     const acrossList = this.shadowRoot.querySelector(".across-list");
     const downList = this.shadowRoot.querySelector(".down-list");
 
-    acrossList.append(...Object.keys(this.data.across).map(
-      n => this.createListItem(n, this.data.across[n])));
-
-    downList.append(...Object.keys(this.data.down).map(
-      n => this.createListItem(n, this.data.down[n])));
+    acrossList.append(...this.clues.filter(
+      clue => clue.direction === "across").map(this.createListItem.bind(this)));
+    downList.append(...this.clues.filter(
+      clue => clue.direction === "down").map(this.createListItem.bind(this)));
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    if (name === "selected") {
+    if (name === "clue-id") {
       if (oldVal)
         this.shadowRoot.querySelector("#clue-" + oldVal).classList = "";
       this.shadowRoot.querySelector("#clue-" + newVal).classList = "selected";
     }
   }
 
-  createListItem(num, item) {
+  createListItem(item) {
     const li = document.createElement("li");
     li.id = "clue-" + item.id;
     li.innerHTML = `
-      <div class="clue-label">${num}</div>
+      <div class="clue-label">${item.number}</div>
       <div class="clue-text">${item.clue}</div>
     `;
 
@@ -95,12 +100,12 @@ class CrosswordClues extends HTMLElement {
     return li;
   }
 
-  get selected() {
-    return this.getAttribute("selected");
+  get clueId() {
+    return this.getAttribute("clue-id");
   }
 
-  set selected(val) {
-    this.setAttribute("selected", val);
+  set clueId(val) {
+    this.setAttribute("clue-id", val);
   }
 }
 
