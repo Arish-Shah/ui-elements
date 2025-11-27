@@ -11,7 +11,7 @@ game.data = {
       number: 1,
       clue: "Prefix for some music genres",
       direction: "across",
-      length: 5,
+      length: 3,
       position: { x: 0, y: 0 },
       solution: "ALT",
     },
@@ -20,8 +20,8 @@ game.data = {
       number: 4,
       clue: "Fab ___ (nickname for the Beatles)",
       direction: "across",
-      length: 3,
-      position: { x: 1, y: 0 },
+      length: 4,
+      position: { x: 0, y: 1 },
       solution: "FOUR",
     },
     {
@@ -30,7 +30,7 @@ game.data = {
       clue: "Eagle's claw",
       direction: "across",
       length: 5,
-      position: { x: 2, y: 0 },
+      position: { x: 0, y: 2 },
       solution: "TALON",
     },
     {
@@ -39,16 +39,16 @@ game.data = {
       clue: "Fab ___ (nickname for a noted University of Michigan basketball team)",
       direction: "across",
       length: 4,
-      position: { x: 3, y: 1 },
+      position: { x: 1, y: 3 },
       solution: "FIVE",
     },
     {
       id: "9A",
-      number: 10,
+      number: 9,
       clue: "Congregant's seat",
       direction: "across",
       length: 3,
-      position: { x: 4, y: 2 },
+      position: { x: 2, y: 4 },
       solution: "PEW",
     },
     {
@@ -66,7 +66,7 @@ game.data = {
       clue: "Shape of a cat with its legs tucked under itself",
       direction: "down",
       length: 4,
-      position: { x: 0, y: 1 },
+      position: { x: 1, y: 0 },
       solution: "LOAF",
     },
     {
@@ -75,7 +75,7 @@ game.data = {
       clue: "Flower that's the subject of Dutch festivals",
       direction: "down",
       length: 5,
-      position: { x: 0, y: 2 },
+      position: { x: 2, y: 0 },
       solution: "TULIP",
     },
     {
@@ -84,7 +84,7 @@ game.data = {
       clue: "Wander aimlessly",
       direction: "down",
       length: 4,
-      position: { x: 1, y: 3 },
+      position: { x: 3, y: 1 },
       solution: "ROVE"
     },
     {
@@ -93,7 +93,7 @@ game.data = {
       clue: "Like many shows at the top of the Netflix queue",
       direction: "down",
       length: 3,
-      position: { x: 2, y: 4 },
+      position: { x: 4, y: 2 },
       solution: "NEW",
     }
   ],

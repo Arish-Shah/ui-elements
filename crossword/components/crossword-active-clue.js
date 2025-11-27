@@ -9,17 +9,17 @@ template.innerHTML = `
       height: 2.5rem;
     }
 
-    .clue-id {
+    .id {
       font-weight: bold;
     }
   </style>
-  <div class="clue-id"></div>
-  <div class="clue-text"></div>
+  <div class="id"></div>
+  <div class="text"></div>
 `;
 
 class CrosswordActiveClue extends HTMLElement {
   static get observedAttributes() {
-    return ["clue-id", "clue-text"];
+    return ["id", "text"];
   }
 
   constructor() {
@@ -27,31 +27,31 @@ class CrosswordActiveClue extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.idEl = this.shadowRoot.querySelector(".clue-id");
-    this.textEl = this.shadowRoot.querySelector(".clue-text");
+    this.idEl = this.shadowRoot.querySelector(".id");
+    this.textEl = this.shadowRoot.querySelector(".text");
   }
 
   attributeChangedCallback(name, _, newVal) {
     switch(name) {
-      case "clue-id": this.idEl.textContent = newVal; break;
-      case "clue-text": this.textEl.textContent = newVal; break;
+      case "id": this.idEl.textContent = newVal; break;
+      case "text": this.textEl.textContent = newVal; break;
     }
   }
 
-  get clueId() {
-    return this.getAttribute("clue-id");
+  get id() {
+    return this.getAttribute("id");
   }
 
-  set clueId(val) {
-    this.setAttribute("clue-id", val);
+  set id(val) {
+    this.setAttribute("id", val);
   }
 
-  get clueText() {
-    return this.getAttribute("clue-text");
+  get text() {
+    return this.getAttribute("text");
   }
 
-  set clueText(val) {
-    this.setAttribute("clue-text", val);
+  set text(val) {
+    this.setAttribute("text", val);
   }
 }
 

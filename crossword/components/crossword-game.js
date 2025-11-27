@@ -1,6 +1,7 @@
-import "./crossword-grid.js";
+import "./crossword-board.js";
 import "./crossword-clues.js";
 import "./crossword-active-clue.js";
+import { transform } from "./util.js";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -12,15 +13,15 @@ template.innerHTML = `
       :host { flex-direction: column; gap: 0; }
     }
   </style>
-  <crossword-grid>
+  <crossword-board>
     <crossword-active-clue></crossword-active-clue>
-  </crossword-grid>
+  </crossword-board>
   <crossword-clues></crossword-clues>
 `;
 
 class CrosswordGame extends HTMLElement {
   static get observedAttributes() {
-    return ["state", "selected-clue-id"];
+    return ["board-state", "selected-clue-id"];
   }
 
   constructor() {
@@ -30,18 +31,26 @@ class CrosswordGame extends HTMLElement {
   }
 
   async connectedCallback() {
+    this.data = transform(this.data);
+
     this.cluesEl = this.shadowRoot.querySelector("crossword-clues");
     this.activeClueEl = this.shadowRoot.querySelector("crossword-active-clue");
-    this.gridEl = this.shadowRoot.querySelector("crossword-grid");
+    this.boardEl = this.shadowRoot.querySelector("crossword-board");
 
-    this.cluesEl.clues = this.data.entries;
-    this.gridEl.size = this.data.size;
+    this.cluesEl.entries = this.data.entries;
+    this.boardEl.size = this.data.size;
 
     this.cluesEl.addEventListener("clue-selected", e => {
       this.selectedClueId = e.detail;
     });
 
     this.selectedClueId = this.data.entries[0].id;
+
+    this.boardEl.addEventListener("board-change", e => {
+      this.boardState = e.detail;
+    });
+
+    this.boardState = ("_".repeat(this.data.size[0]) + ",").repeat(this.data.size[1]);
   }
 
   async attributeChangedCallback(name, _, newVal) {
@@ -50,10 +59,23 @@ class CrosswordGame extends HTMLElement {
       await customElements.whenDefined("crossword-active-clue");
 
       const selectedClue = this.data.entries.find(c => c.id === newVal);
-      this.cluesEl.clueId = selectedClue.id;
-      this.activeClueEl.clueId = selectedClue.id;
-      this.activeClueEl.clueText = selectedClue.clue;
+      this.cluesEl.selectedId = selectedClue.id;
+      this.activeClueEl.id = selectedClue.id;
+      this.activeClueEl.text = selectedClue.clue;
     }
+
+    if (name === "board-state") {
+      await customElements.whenDefined("crossword-board");
+      this.boardEl.state = this.boardState;
+    }
+  }
+
+  get boardState() {
+    return this.getAttribute("board-state");
+  }
+
+  set boardState(val) {
+    this.setAttribute("board-state", val);
   }
 
   get selectedClueId() {

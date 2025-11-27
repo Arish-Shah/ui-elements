@@ -5,10 +5,13 @@ template.innerHTML = `
     :host { flex: 1; }
   </style>
   <slot></slot>
-  <div class="board"></div>
 `;
 
-class CrosswordGrid extends HTMLElement {
+class CrosswordBoard extends HTMLElement {
+  static get observedAttributes() {
+    return ["state"];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -16,9 +19,19 @@ class CrosswordGrid extends HTMLElement {
   }
 
   connectedCallback() {
-    const [rows, cols] = this.size.split("x").map(Number);
-    this.board = this.shadowRoot.querySelector(".board");
+  }
+
+  attributeChangedCallback() {
+    console.log(arguments);
+  }
+
+  get state() {
+    return this.getAttribute("state");
+  }
+
+  set state(val) {
+    this.setAttribute("state", val);
   }
 }
 
-customElements.define("crossword-grid", CrosswordGrid);
+customElements.define("crossword-board", CrosswordBoard);

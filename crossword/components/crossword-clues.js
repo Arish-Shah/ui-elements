@@ -25,7 +25,7 @@ template.innerHTML = `
     }
 
     li.selected {
-      background: #ffff00;
+      background: #ffe500;
     }
 
     .clue-label {
@@ -56,7 +56,7 @@ template.innerHTML = `
 
 class CrosswordClues extends HTMLElement {
   static get observedAttributes() {
-    return ["clue-id"];
+    return ["selected-id"];
   }
 
   constructor() {
@@ -69,16 +69,17 @@ class CrosswordClues extends HTMLElement {
     const acrossList = this.shadowRoot.querySelector(".across-list");
     const downList = this.shadowRoot.querySelector(".down-list");
 
-    acrossList.append(...this.clues.filter(
+    acrossList.append(...this.entries.filter(
       clue => clue.direction === "across").map(this.createListItem.bind(this)));
-    downList.append(...this.clues.filter(
+    downList.append(...this.entries.filter(
       clue => clue.direction === "down").map(this.createListItem.bind(this)));
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    if (name === "clue-id") {
-      if (oldVal)
+    if (name === "selected-id") {
+      if (oldVal) {
         this.shadowRoot.querySelector("#clue-" + oldVal).classList = "";
+      }
       this.shadowRoot.querySelector("#clue-" + newVal).classList = "selected";
     }
   }
@@ -100,12 +101,12 @@ class CrosswordClues extends HTMLElement {
     return li;
   }
 
-  get clueId() {
-    return this.getAttribute("clue-id");
+  get selectedId() {
+    return this.getAttribute("selected-id");
   }
 
-  set clueId(val) {
-    this.setAttribute("clue-id", val);
+  set selectedId(val) {
+    this.setAttribute("selected-id", val);
   }
 }
 
