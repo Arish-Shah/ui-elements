@@ -1,9 +1,10 @@
-import "./components/crossword-game.js";
+import "./src/crossword.js";
 
-const game = document.createElement("crossword-game");
+const crossword = document.createElement("crossword-app");
 
-game.data = {
-  id: "crosswords/mini/1",
+crossword.data = {
+  id: "crosswords/example/1",
+  title: "example crossword 1",
   size: "5x5",
   entries: [
     {
@@ -99,4 +100,4 @@ game.data = {
   ],
 };
 
-document.body.appendChild(game);
+document.body.appendChild(crossword);
