@@ -7,10 +7,20 @@ template.innerHTML = `
       display: block;
       border-left: 2px solid #000000;
       border-top: 2px solid #000000;
+      position: relative;
     }
 
     :host([blocked]) {
       background: #000000;
+    }
+
+    :host([highlight]) {
+      background: #85c8ff;
+    }
+
+    .number {
+      position: absolute;
+      left: 0.1rem;
     }
 
     input {
@@ -21,13 +31,18 @@ template.innerHTML = `
       aspect-ratio: 1 / 1;
       background: transparent;
     }
+
+    input:focus {
+      background: #ffe500;
+    }
   </style>
+  <span class="number"></span>
   <input type="text" maxlength="1" tabindex="-1" />
 `;
 
 class CrosswordCell extends HTMLElement {
   static get observedAttributes() {
-    return ["blocked", "value"];
+    return ["value", "highlight"];
   }
 
   constructor() {
@@ -41,6 +56,23 @@ class CrosswordCell extends HTMLElement {
       this.setAttribute("blocked", "");
       this.shadowRoot.querySelector("input").disabled = true;
     }
+
+    if (this.clueNumber) {
+      this.shadowRoot.querySelector(".number").textContent = this.clueNumber;
+    }
+  }
+
+  focus() {
+    this.shadowRoot.querySelector("input").focus();
+  }
+
+  get highlight() {
+    return this.hasAttribute("highlight");
+  }
+
+  set highlight(val) {
+    if (val) this.setAttribute("highlight", "");
+    else this.removeAttribute("highlight");
   }
 }
 

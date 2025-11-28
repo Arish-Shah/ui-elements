@@ -13,13 +13,6 @@ template.innerHTML = `
     .container {
       flex: 1;
     }
-
-    @media screen and (max-width: 768px) {
-      :host {
-        flex-direction: column;
-        gap: 0;
-      }
-    }
   </style>
   <div class="container">
     <crossword-current-clue></crossword-current-clue>
@@ -43,6 +36,7 @@ class CrosswordApp extends HTMLElement {
     this.cluesEl.addEventListener("clue-selected", e => {
       this.cluesEl.current = e.detail;
       this.currentClueEl.clue = this.data.entries.find(c => c.id === e.detail);
+      this.gridEl.current = e.detail;
     });
 
     this.cluesEl.clues = this.data.entries;
@@ -50,6 +44,9 @@ class CrosswordApp extends HTMLElement {
 
     await customElements.whenDefined("crossword-current-clue");
     this.currentClueEl.clue = this.data.entries[0];
+
+    await customElements.whenDefined("crossword-grid");
+    this.gridEl.current = this.data.entries[0].id;
 
     await customElements.whenDefined("crossword-clues");
     this.cluesEl.current = this.data.entries[0].id;

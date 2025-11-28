@@ -4,9 +4,7 @@ template.innerHTML = `
     * { box-sizing: border-box; }
 
     :host {
-      padding: 0.25rem;
       display: flex;
-      gap: 0.5rem;
     }
 
     .label {

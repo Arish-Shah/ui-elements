@@ -8,13 +8,11 @@ template.innerHTML = `
     :host {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
     }
 
     .heading {
       font-weight: bold;
       border-bottom: 1px solid #a2a2a2;
-      padding: 0.25rem;
     }
 
     ul {
@@ -25,9 +23,7 @@ template.innerHTML = `
 
     li {
       cursor: pointer;
-      padding: 0.25rem 0;
       display: flex;
-      gap: 0.5rem;
     }
 
     li.selected {
@@ -41,14 +37,7 @@ template.innerHTML = `
     }
 
     .text {
-      padding-right: 0.25rem;
       flex: 1;
-    }
-
-    @media screen and (min-width: 1024px) {
-      :host {
-        flex-direction: row;
-      }
     }
   </style>
   <div class="container">
