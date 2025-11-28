@@ -1,20 +1,18 @@
 export function transform(data) {
   data.size = data.size.split("x").map(Number);
-  data.grid = Array.from({ length: 5 }, () => Array(5).fill("#")); // solution grid
-  data.filled = Array.from({ length: 5 }, () => Array(5).fill("#")); // user entered values
+  data.grid = Array.from({ length: data.size[0] }, () => Array(data.size[1]).fill("#")); // solution grid
+  data.filled = structuredClone(data.grid);
 
-  // all the cells an answer spans
-  // useful for switching directions
-  data.entries.map((e) => {
+  data.entries.forEach(e => {
     e.cells = [];
 
-    for (let i = 0; i < e.length; i++) {
-      const [y, x] = e.direction === "across" ?
-        [e.position.y, e.position.x + i] : [e.position.y + i, e.position.x];
-      e.cells.push(y + "," + x);
+    for (let j = 0; j < e.length; j++) {
+      const [row, col] = e.direction === "across" ?
+        [e.position.row, e.position.col + j] : [e.position.row + j, e.position.col];
+      e.cells.push(row + "," + col);
 
-      data.grid[y][x] = e.solution[i];
-      data.filled[y][x] = "_";
+      data.grid[row][col] = e.solution[j];
+      data.filled[row][col] = "_";
     }
   });
 

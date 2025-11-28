@@ -14,7 +14,7 @@ template.innerHTML = `
       flex: 1;
     }
 
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 768px) {
       :host {
         flex-direction: column;
         gap: 0;
@@ -46,7 +46,7 @@ class CrosswordApp extends HTMLElement {
     });
 
     this.cluesEl.clues = this.data.entries;
-    this.gridEl.size = this.data.size;
+    this.gridEl.data = this.data;
 
     await customElements.whenDefined("crossword-current-clue");
     this.currentClueEl.clue = this.data.entries[0];

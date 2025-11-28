@@ -4,7 +4,6 @@ template.innerHTML = `
     * { box-sizing: border-box; }
 
     :host {
-      font-size: 0.9rem;
       padding: 0.25rem;
       display: flex;
       gap: 0.5rem;

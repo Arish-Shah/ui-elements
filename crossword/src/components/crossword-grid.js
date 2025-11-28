@@ -29,14 +29,17 @@ class CrosswordGrid extends HTMLElement {
   connectedCallback() {
     const grid = this.shadowRoot.querySelector(".grid");
 
-    for (let i = 0; i < this.size[0]; i++) {
+    for (let i = 0; i < this.data.size[0]; i++) {
       const row = document.createElement("div");
       row.classList = "row";
 
-      for (let j = 0; j < this.size[1]; j++) {
+      for (let j = 0; j < this.data.size[1]; j++) {
         const cell = document.createElement("crossword-cell");
         cell.dataset.row = i;
         cell.dataset.col = j;
+
+        if (this.data.filled[i][j] === "#") cell.blocked = true;
+        cell.label = 15;
 
         row.appendChild(cell);
       }

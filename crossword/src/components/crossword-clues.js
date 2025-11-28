@@ -6,7 +6,6 @@ template.innerHTML = `
     * { box-sizing: border-box; }
 
     :host {
-      font-size: 0.9rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -46,7 +45,7 @@ template.innerHTML = `
       flex: 1;
     }
 
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       :host {
         flex-direction: row;
       }
