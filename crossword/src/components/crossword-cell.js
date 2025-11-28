@@ -52,14 +52,37 @@ class CrosswordCell extends HTMLElement {
   }
 
   connectedCallback() {
+    this.input = this.shadowRoot.querySelector("input");
+
     if (this.blocked) {
       this.setAttribute("blocked", "");
-      this.shadowRoot.querySelector("input").disabled = true;
+      this.input.disabled = true;
     }
 
     if (this.clueNumber) {
       this.shadowRoot.querySelector(".number").textContent = this.clueNumber;
     }
+
+    this.input.addEventListener("keyup", e => {
+      const key = e.key.toUpperCase();
+
+      if (key === "BACK") {}
+
+      if (key.length === 1 && key >= "A" && key <= "Z")
+        this.dispatchEvent(new CustomEvent("cell-updated", {
+          detail: { coord: this.getAttribute("data-coord"), key },
+          bubbles: true,
+          composed: true,
+        }));
+    });
+
+    this.input.addEventListener("click", e => {
+      console.log(this.shadowRoot.activeElement === e.target);
+    });
+  }
+
+  disconnectedCallback() {
+    this.input.removeEventListener("keyup");
   }
 
   focus() {

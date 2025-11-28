@@ -39,6 +39,10 @@ class CrosswordApp extends HTMLElement {
       this.gridEl.current = e.detail;
     });
 
+    this.gridEl.addEventListener("cell-updated", e => {
+      console.log(e.detail);
+    });
+
     this.cluesEl.clues = this.data.entries;
     this.gridEl.data = this.data;
 
@@ -50,6 +54,10 @@ class CrosswordApp extends HTMLElement {
 
     await customElements.whenDefined("crossword-clues");
     this.cluesEl.current = this.data.entries[0].id;
+  }
+
+  disconnectedCallback() {
+    this.cluesEl.removeEventListener("clue-selected");
   }
 
   get data() {

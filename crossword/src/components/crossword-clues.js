@@ -71,6 +71,12 @@ class CrosswordClues extends HTMLElement {
       .append(...down.map(this.generateClueItem.bind(this)));
   }
 
+  disconnectedCallback() {
+    const items = this.shadowRoot.querySelectorAll("li");
+
+    items.forEach(item => item.removeEventListener("click"));
+  }
+
   attributeChangedCallback(_, oldVal, newVal) {
     if (oldVal) {
       this.shadowRoot.querySelector(`[data-id="${oldVal}"]`).classList = "";

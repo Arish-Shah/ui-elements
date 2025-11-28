@@ -49,7 +49,6 @@ class CrosswordGrid extends HTMLElement {
         if (coord in this.data.clueNumbers) {
           cell.clueNumber = this.data.clueNumbers[coord];
         }
-
         row.appendChild(cell);
       }
       grid.appendChild(row);
