@@ -10,12 +10,7 @@ template.innerHTML = `
 
     :host {
       display: flex; 
-    }
-
-    @media screen and (max-width: 980px) {
-      :host {
-        flex-direction: column; 
-      } 
+      flex-direction: column;
     }
   </style>
   <div class="container">
@@ -40,15 +35,33 @@ class XWApp extends HTMLElement {
     this.cluesEl = this.shadowRoot.querySelector("xw-clues");
 
     this.cluesEl.addEventListener("clue-clicked", e => {});
+
+    this.resizeObserver = new ResizeObserver((entries) => {
+      if (!this.puzzleData) return;
+      const width = entries[0].contentRect.width;
+
+      const cellSize = Math.floor(width / this.puzzleData.dimensions.width);
+      const textSize = Math.floor(cellSize * 0.55);
+      const labelSize = Math.floor(cellSize * 0.25);
+    
+      this.style.setProperty("--xw-text-size", `${textSize}px`);
+      this.style.setProperty("--xw-label-size", `${labelSize}px`);
+    });
+    this.resizeObserver.observe(this.gridEl);
   }
 
   async attributeChangedCallback(_, __, newVal) {
     const response = await fetch(newVal);
     const data = await response.json();
-    const puzzleData = parse(data);
+    this.puzzleData = parse(data);
 
-    this.gridEl.puzzle = puzzleData.puzzle;
-      this.cluesEl.clues = puzzleData.clues;
+    this.gridEl.puzzle = this.puzzleData.puzzle;
+      this.cluesEl.clues = this.puzzleData.clues;
+  }
+
+  disconnectedCallback() {
+    this.cluesEl.removeEventListener("clue-selected");
+    this.resizeObserver.disconnect();
   }
 
   get src() {

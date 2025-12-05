@@ -27,9 +27,10 @@ template.innerHTML = `
 
     label {
       position: absolute;
-      top: 0; 
-      left: 0;
+      top: 0.15rem; 
+      left: 0.15rem;
       background: #ffffff;
+      font-size: var(--xw-label-size);
     }
 
     input {
@@ -39,6 +40,7 @@ template.innerHTML = `
       background: transparent;
       text-align: center;
       aspect-ratio: 1/1;
+      font-size: var(--xw-text-size);
     }
   </style>
   <label></label>
