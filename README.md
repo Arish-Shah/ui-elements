@@ -2,7 +2,7 @@
 
 a collection of experimental web components
 
-- [crossword](crossword)
+- [xw](xw)
 - [notes](notes)
 - [doomsday](doomsday)
 - [focus](focus)
