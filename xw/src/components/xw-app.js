@@ -9,8 +9,8 @@ template.innerHTML = `
     * { box-sizing: border-box; }
 
     :host {
+      padding: 0.5rem;
       display: flex; 
-      flex-direction: column;
     }
   </style>
   <div class="container">
@@ -34,8 +34,10 @@ class XWApp extends HTMLElement {
     this.gridEl = this.shadowRoot.querySelector("xw-grid");
     this.cluesEl = this.shadowRoot.querySelector("xw-clues");
 
-    this.cluesEl.addEventListener("clue-clicked", e => {});
+    this.resizeFonts();
+  }
 
+  resizeFonts() {
     this.resizeObserver = new ResizeObserver((entries) => {
       if (!this.puzzleData) return;
       const width = entries[0].contentRect.width;
@@ -43,7 +45,7 @@ class XWApp extends HTMLElement {
       const cellSize = Math.floor(width / this.puzzleData.dimensions.width);
       const textSize = Math.floor(cellSize * 0.55);
       const labelSize = Math.floor(cellSize * 0.25);
-    
+
       this.style.setProperty("--xw-text-size", `${textSize}px`);
       this.style.setProperty("--xw-label-size", `${labelSize}px`);
     });
@@ -56,11 +58,10 @@ class XWApp extends HTMLElement {
     this.puzzleData = parse(data);
 
     this.gridEl.puzzle = this.puzzleData.puzzle;
-      this.cluesEl.clues = this.puzzleData.clues;
+    this.cluesEl.clues = this.puzzleData.clues;
   }
 
   disconnectedCallback() {
-    this.cluesEl.removeEventListener("clue-selected");
     this.resizeObserver.disconnect();
   }
 

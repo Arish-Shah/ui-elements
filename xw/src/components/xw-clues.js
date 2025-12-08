@@ -45,12 +45,6 @@ class XWClues extends HTMLElement {
       <span class="label">${clue.number}</span> 
       <span class="text">${clue.clue}</span> 
     `; 
-    item.addEventListener("click", _ => {
-      this.dispatchEvent(new CustomEvent("clue-clicked", {
-        detail: {},
-      }));
-    });
-
     return item;
   }
 

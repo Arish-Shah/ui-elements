@@ -48,6 +48,8 @@ template.innerHTML = `
 `;
 
 class XWCell extends HTMLElement {
+  static observedAttributes = ["value"];
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -59,9 +61,25 @@ class XWCell extends HTMLElement {
     if (this.label) labelEl.textContent = this.label;
   }
 
+  attributeChangedCallback() {
+    console.log(arguments);
+  }
+
+  get blocked() {
+    return this.hasAttribute("blocked");
+  }
+
   set blocked(val) {
     if (val) this.setAttribute("blocked", "");
     else this.removeAttribute("blocked");
+  }
+
+  get value() {
+    return this.getAttribute("value");
+  }
+
+  set value(val) {
+    this.setAttribute("value", val);
   }
 }
 
